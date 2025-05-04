@@ -16,16 +16,8 @@ A web-based system that detects phishing URLs using machine learning models.
 • IDE: VS Code / PyCharm
 
 📁 Project Structure
-phishing-url-detector/
-├── dataset/                  # CSV file(s) of phishing URLs
-├── phishing_model.pkl        # Trained ML model
-├── phishing_app/             # Django app files
-│   ├── views.py
-│   ├── urls.py
-│   ├── templates/
-│   └── static/
-├── manage.py
-└── requirements.txt
+![image](https://github.com/user-attachments/assets/b248d875-4d9e-45e5-ad36-4c2c10635ca1)
+
 
 ⚙️ How to Run
 Run the server:
