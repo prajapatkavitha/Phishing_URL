@@ -1,6 +1,6 @@
 🔐 Phishing URL Detection using Machine Learning
 A web-based system that detects phishing URLs using machine learning models.
-https://github.com/prajapatkavitha/Phishing_URL/blob/main/Project_Demo.mp4
+![video](https://github.com/prajapatkavitha/Phishing_URL/blob/main/Project_Demo.mp4)
 
 🚀 Features
 • Detects phishing vs. legitimate URLs with high accuracy.
