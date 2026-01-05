@@ -1,0 +1,119 @@
+{% extends 'SProvider/Header.html' %}
+
+{% block researchblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Remote Users</title>
+    <link rel="icon" href="images/icon.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+    <style>
+        body {
+            background-color: #000033; /* Dark blue background */
+            color: #FFFFFF; /* White text */
+            font-family: 'Arial', sans-serif; /* Fallback font */
+        }
+        .container-fluid {
+            padding: 25px;
+        }
+        .container {
+            background-color: #ffffff; /* White container background */
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+        }
+        #title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+        .text-uppercase {
+            font-family: 'Righteous', cursive;
+            text-transform: uppercase;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #FFFFFF; /* White border */
+        }
+        th {
+            background-color: #000099; /* Dark blue header */
+            color: #fbfbf7; /* Yellow text */
+            font-size: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        td {
+            background-color: #000033; /* Dark blue cells */
+            color: #FFFFFF; /* White text */
+            font-size: 14px;
+        }
+        .style1 {
+            color: white; /* Red text */
+            font-weight: bold;
+        }
+		.style2 {
+            color: #000033; /* Red text */
+            font-weight: bold;font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form role="form" method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        <p class="text-uppercase style2">View All Remote Users</p>
+                        <div class="viewclients">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>USER NAME</th>
+                                        <th>EMAIL</th>
+                                        <th>ADDRESS</th>
+                                        <th>GENDER</th>
+                                        <th>Mob No</th>
+                                        <th>Country</th>
+                                        <th>State</th>
+                                        <th>City</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for o in objects %}
+                                    <tr>
+                                        <td>{{ o.username }}</td>
+                                        <td>{{ o.email }}</td>
+                                        <td>{{ o.address }}</td>
+                                        <td>{{ o.gender }}</td>
+                                        <td>{{ o.phoneno }}</td>
+                                        <td>{{ o.country }}</td>
+                                        <td>{{ o.state }}</td>
+                                        <td>{{ o.city }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

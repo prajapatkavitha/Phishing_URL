@@ -1,0 +1,164 @@
+{% extends 'SProvider/Header.html' %}
+{% block researchblock %}
+
+<!-- Styles -->
+<style>
+    /* General Body Styling */
+    body {
+        background-color: #f7f8fa; /* Light background for the entire page */
+        font-family: 'Roboto', sans-serif; /* Professional and modern font */
+        margin: 0;
+        padding: 0;
+        color: #333; /* Dark text for good contrast */
+    }
+
+    /* Header Styling */
+    .topic h1 {
+        color: #fff;
+        text-align: center;
+        padding: 20px 0;
+        background-color: #2c3e50; /* Darker background for title */
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    /* Sidebar Styling */
+    .sidemenu {
+     position: fixed;
+     top: 10%;
+     left: 5%;
+     padding: 30px;
+     width: 300px;
+    /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);  Subtle shadow for the sidebar */
+     z-index: 1;
+ }
+ .sidemenu h3 {
+     color: white;
+     font-size: 20px;
+     margin-bottom: 15px;
+     text-transform: uppercase;
+     font-weight: bold;
+ }
+
+ /* Styling the options as button-like clickable elements */
+ .sidemenu a {
+     display: block;
+     background-color: #71f9de;
+     color: rgb(30, 12, 224);
+     padding: 15px;
+     border-radius: 30px;
+     text-align: center;
+     text-decoration: none;
+     margin-bottom: 15px;
+     font-size: 15px;
+     font-weight: bold;
+     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+ }
+
+ /* Button hover effect */
+ .sidemenu a:hover {
+     background-color: #007b9f;
+     transform: scale(1.05); /* Slight scale-up effect */
+     box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2); /* Shadow effect */
+ }
+
+
+    
+    /* Card Styling for Graph */
+    #chartContainer {
+     width: 65%;
+     max-width: 800px;
+     margin-left: 500px;
+     background-color: #fff;
+     border-radius: 10px;
+     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Subtle card shadow */
+     padding: 15px;
+     transition: transform 0.3s ease-in-out;
+     height: 350px; /* Fixed height for graph */
+     overflow: hidden; /* To ensure that graph size remains in bounds */
+ }
+
+ /* Hover effect for chart card */
+ #chartContainer:hover {
+     transform: translateY(-5px); /* Lift effect on hover */
+ }
+
+    
+    /* Menu Table (if used) */
+    .menu table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: center;
+        background-color: #ecf0f1;
+    }
+
+    .menu table th, .menu table td {
+        padding: 15px;
+        border: 1px solid #ddd;
+    }
+
+    .menu table td {
+        background-color: #f4f4f4;
+        cursor: pointer;
+    }
+
+    .menu table td:hover {
+        background-color: #16a085;
+        color: #fff;
+    }
+
+</style>
+
+<!-- JavaScript for Chart -->
+<script>
+    window.onload = function() {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+                text: "" // This can be customized if needed
+            },
+            data: [{
+                {% if chart_type == "line" %}
+                    type: "line",
+                {% elif chart_type == "pie" %}
+                    type: "pie",
+                {% elif chart_type == "spline" %}
+                    type: "spline",
+                {% endif %}
+                startAngle: 240,
+                yValueFormatString: "##0.00\"%\"",
+                indexLabel: "{label} {y}",
+                dataPoints: [
+                    {% for o in form %}
+                        {y: {{ o.dcount }}, label: "{{ o.names }}"},
+                    {% endfor %}
+                ]
+            }]
+        });
+        chart.render();
+    }
+</script>
+
+<!-- Body Content -->
+<body>
+    <div class="topic">
+       <br><br>
+    </div>
+
+    <!-- Sidebar for Chart Type Selection -->
+    <div class="sidemenu"><br><br><br><br><br><br><br><br><br>
+        <h3>Data Visualization......</h3><br>
+        <a href="{% url 'charts1' 'pie' %}">Pie Chart</a>
+        <a href="{% url 'charts1' 'line' %}">Line Chart</a>
+        <a href="{% url 'charts1' 'spline' %}">Spline Chart</a>
+    </div>
+
+    <!-- Chart Container -->
+    <div id="chartContainer"></div>
+
+    <!-- CanvasJS Script -->
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+
+{% endblock %}

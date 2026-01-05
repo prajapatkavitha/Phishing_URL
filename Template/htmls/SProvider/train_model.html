@@ -1,0 +1,160 @@
+{% extends 'SProvider/Header.html' %}
+
+{% block researchblock %}
+
+<!-- Link Favicon -->
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+
+<!-- External Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Lobster|Righteous|Fredoka+One" rel="stylesheet">
+
+<!-- Styles -->
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: white;
+        background-color: #000033; /* Dark blue background for the entire page */
+    }
+
+    /* Flexbox Layout for Title and Form */
+    .container-fluid {
+        display: flex;
+        justify-content: space-between; /* Space between the title and form */
+        padding: 50px 15px;
+        align-items: center; /* Center vertically */
+    }
+
+    /* Left Title Styling */
+    .left-title {
+        font-family: 'Fredoka One', cursive;
+        font-size: 36px;
+        color: #ffffff;
+        text-align: left;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* Container for the form */
+    .form-container {
+        background-color: rgba(255, 255, 255, 0.9); /* Transparent white background for the form */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        max-width: 700px;
+        width: 100%;
+    }
+
+    /* Form Header Styling */
+    .form-header {
+        font-family: 'Righteous', cursive;
+        font-size: 25px;
+        text-align: center;
+        color:#000033;                                    
+        margin-bottom: 10px;
+    }
+
+    .style1 {
+        color: white;
+        font-weight: bold;
+    }
+
+    .style7 {
+        color: #fafaf9; /* Yellow for accent */
+    }
+
+    /* Table Styling */
+    table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+        background-color: rgba(255, 255, 255, 0.9); /* Transparent table background */
+    }
+
+    table th,
+    table td {
+        padding: 12px;
+        text-align: center;
+        font-size: 18px;
+        border: 1px solid #faf6fa; /* Pink border */
+    }
+
+    table th {
+        background-color: #000099; /* Pink background for headers */
+        color: white;
+        font-size: 25px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    table td {
+        background-color: #FFFFFF; /* White background for cells */
+        color: #333;
+        font-family: 'Arial', sans-serif;
+        font-size: 18px;
+    }
+
+    table tr:hover {
+        background-color: #f0f0f0; /* Hover effect for rows */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container-fluid {
+            flex-direction: column; /* Stack the title and form vertically on small screens */
+        }
+
+        .form-container {
+            max-width: 100%;
+            padding: 15px;
+        }
+
+        table {
+            font-size: 14px;
+        }
+    }
+
+</style>
+
+<!-- Body Content -->
+<body>
+    <div class="container-fluid">
+        <!-- Left-aligned Title -->
+        <div class="left-title">
+            View URL Datasets:<br><br>Trained and Tested Results
+        </div>
+		
+        <!-- Right-aligned Form Container -->
+        <div class="form-container">
+            <div class="form-header"><br>
+                View and Compare Model Results
+            </div>
+            <form role="form" method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    <div>
+                        <table align="center" bordercolor="white">
+                            <tr>
+                                <th>Model Type</th>
+                                <th>Accuracy</th>
+                            </tr>
+                            {% for object in objs %}
+                                <tr>
+                                    <td style="color:rgb(250, 247, 247); font-size:20px; font-family:fantasy; background-color:#000033;">
+                                        <div align="center">{{ object.names }}</div>
+                                    </td>
+                                    <td style="font-family:monospace; font-size:19px;background-color:#000033;">
+                                        <div align="center" class="style9"><span class="style7">{{ object.ratio }}</span></div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'SProvider/Header.html' %}
+
+{% block researchblock %}
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css?family=Lobster|Righteous|Fredoka+One" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #000000;
+        font-family: 'Fredoka One', cursive;
+        color: rgb(251, 251, 251);
+    }
+
+    .container-fluid {
+        padding: 25px ;
+    }
+
+    .container {
+        background-color: rgb(247, 252, 251);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #title {
+        font-family: 'Fredoka One', cursive;
+    }
+
+    .text-uppercase {
+        font-family: 'Righteous', cursive;
+    }
+
+    .style1 {
+        color: #f9f7f7f5;
+        font-weight: bold;
+    }
+
+    .style12 {
+        color: #100a04;
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;height:fit-content;
+        border-collapse: collapse;
+        margin: 0 auto;
+    }
+
+    th, td {padding: 5px 10px;
+        padding: 15px;
+        text-align: center;
+        font-size: 18px;
+        font-family: 'fantasy';
+    }
+
+    th {padding: 5px 10px;
+        background-color:  #000099;
+        color: rgba(255, 253, 250, 0.941); text-align: left;font-size: 25px;
+    }
+    td {padding: 5px 10px;
+        background-color: #000033; text-align: left;
+            color: #FFFFFF; /* White text */
+            font-size: 18px;
+    }
+
+    .form-header {
+        text-align: center;
+        font-family: 'Righteous', cursive;
+        font-size: 25px;
+        font-weight: bold;
+        color: #000033;
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form role="form" method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <p class="form-header">View URL Prediction Type Details</p>
+                            <hr>
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>URL Name</th>
+                                            <th>Prediction Type</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for object in list_objects %}
+                                        <tr>
+                                            <td>{{ object.url_name }}</td>
+                                            <td>{{ object.Prediction }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>

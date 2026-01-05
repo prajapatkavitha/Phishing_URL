@@ -1,0 +1,254 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Fredoka+One&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: url("{% static 'bg1.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container-fluid {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .left-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .right-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+            border-radius: 10px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow to keep card visible */
+            transform: scale(0.98); /* Initial slightly scaled down */
+            opacity: 0; /* Initially hidden */
+            transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on load */
+        }
+
+        /* On hover effect for login card */
+        .login-card:hover {
+            transform: scale(1.02); /* Slight increase in size */
+            box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+        }
+
+        /* Show login card with fade-in effect after the page loads */
+        .login-card.visible {
+            opacity: 1;
+            transform: scale(1); /* Return to normal scale */
+        }
+
+        h2 {
+            font-family: 'Fredoka One', cursive;
+            color: #FFFFFF; /* White for the main title */
+            font-size: 38px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
+
+        p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            color: #E0E0E0; /* Light gray for subtitle */
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            transition: all 0.3s ease;
+        }
+
+        /* On focus effect */
+        .form-group input:focus {
+            border-color: #00aaff;
+            outline: none;
+            background-color: #e8f7ff; /* Light blue background on focus */
+        }
+
+        .btn {
+            background-color: #000033;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Button hover effect */
+        .btn:hover {
+            background-color: #007b9f;
+            transform: scale(1.05);
+        }
+
+        .btn-lg a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-lg a:hover {
+            text-decoration: underline;
+        }
+
+        .text-center a {
+            color: #00aaff;
+            text-decoration: none;
+        }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+
+        .style2 {
+            font-family: 'Open Sans', sans-serif;
+            color: #000033; /* Professional light blue */
+            font-weight: 600;
+            font-size: 24px;  /* Increased subtitle font size */
+            margin-bottom: 10px;  /* Adjusted bottom margin */
+            transition: color 0.3s ease;
+        }
+
+        /* Adjusted font size for the second part of the subtitle */
+        .style5 {
+            color: #FF0099; /* Professional pinkish color */
+            font-weight: bold;
+            font-size: 18px;  /* Increased size for the second subtitle text */
+        }
+
+        .button-container button {
+            margin-bottom: 10px;
+        }
+
+        .login-card hr {
+            border: 1px solid #000033; /* Light blue border for hr */
+            margin-bottom: 10px;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Hover effect for hr */
+        .login-card:hover hr {
+            border-color: #000033; /* Darker blue when the card is hovered */
+        }
+
+        /* Adjustments for mobile responsiveness */
+        @media (max-width: 768px) {
+            .container-fluid {
+                flex-direction: column;
+            }
+
+            .left-section, .right-section {
+                width: 100%;
+                padding: 10px;
+                text-align: center;
+            }
+
+            .login-card {
+                padding: 10px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <!-- Left Section for Title and Subtitle -->
+        <div class="left-section">
+            <div>
+                <h2>Phishing URL Detection</h2>
+                <p style="color:rgb(254, 255, 255)"><h3>A Real Case Scenario Through Login URLs</h3></p>
+            </div>
+        </div>
+
+        <!-- Right Section for the Login Card -->
+        <div class="right-section">
+            <div class="login-card">
+                <p class="style2 text-center">Login Service Provider:</p><hr>
+                <form method="POST" role="form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="username" placeholder="User Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div>
+                        <input type="submit" name="submit1" class="btn" value="Login">
+                    </div>
+
+                    <br><hr><br>
+                    <div class="button-container">
+                        <button class="btn btn-lg">
+                            <a href="{% url 'login' %}">User Login</a>
+                        </button>
+                        <button class="btn btn-lg">
+                            <a href="{% url 'Register1' %}">Register</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to trigger visibility of login card on page load -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelector(".login-card").classList.add("visible");
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+{% extends 'SProvider/Header.html' %}
+{% block researchblock %}
+
+<style>
+    /* General Body Styling */
+    body {
+        background-color: #f7f8fa; /* Light background for the entire page */
+        font-family: 'Roboto', sans-serif; /* Professional and modern font */
+        margin: 0;
+        padding: 0;
+        color: #333; /* Dark text for good contrast */
+    }
+
+    /* Sidebar Styling - transparent background */
+    .sidemenu {
+        position: fixed;
+        top: 10%;
+        left: 5%;
+        padding: 30px;
+        width: 300px;
+       /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);  Subtle shadow for the sidebar */
+        z-index: 1;
+    }
+
+    .sidemenu h3 {
+        color: white;
+        font-size: 20px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    /* Styling the options as button-like clickable elements */
+    .sidemenu a {
+        display: block;
+        background-color: #71f9de;
+        color: rgb(30, 12, 224);
+        padding: 15px;
+        border-radius: 30px;
+        text-align: center;
+        text-decoration: none;
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Button hover effect */
+    .sidemenu a:hover {
+        background-color: #007b9f;
+        transform: scale(1.05); /* Slight scale-up effect */
+        box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    }
+
+    /* Card Styling for Graph */
+    #chartContainer {
+        width: 65%;
+        max-width: 800px;
+        margin-left: 500px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Subtle card shadow */
+        padding: 15px;
+        transition: transform 0.3s ease-in-out;
+        height: 350px; /* Fixed height for graph */
+        overflow: hidden; /* To ensure that graph size remains in bounds */
+    }
+
+    /* Hover effect for chart card */
+    #chartContainer:hover {
+        transform: translateY(-5px); /* Lift effect on hover */
+    }
+
+    /* Topic Styling */
+    .topic h1 {
+        color: #2c3e50; /* Darker title color */
+        text-align: left;
+        padding: 20px;
+        font-size: 18px;
+      
+        color: white;
+        border-radius: 10px;
+        margin-bottom: 0px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+       /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);*/
+    }
+
+    /* Responsive Layout */
+    @media (max-width: 768px) {
+        /* Chart Container adjusts */
+        #chartContainer {
+            width: 90%;
+            margin-left: 5%;
+            height: 350px;
+        }
+
+        .sidemenu {
+            position: relative;
+            width: 100%;
+            top: 0;
+            margin-bottom: 20px;
+        }
+
+        .sidemenu a {
+            font-size: 16px;
+            padding: 20px;
+        }
+
+        .topic h1 {
+            font-size: 10px;
+        }
+    }
+</style>
+
+<script>
+    window.onload = function() {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+                text: "Phishing URL Detection Analysis"
+            },
+            data: [{
+                {% if chart_type == "line" %}
+                type: "line",
+                {% elif chart_type == "pie" %}
+                type: "pie",
+                {% elif chart_type == "spline" %}
+                type: "spline",
+                {% endif %}
+                startAngle: 240,
+                yValueFormatString: "##0.00\"%\"",
+                indexLabel: "{label} {y}",
+                dataPoints: [
+                    {% for o in form %}
+                    {y: {{o.dcount}}, label: "{{o.names}}"},
+                    {% endfor %}
+                ]
+            }]
+        });
+        chart.render();
+    }
+</script>
+
+<body>
+    <div class="topic">
+      <br><br>
+    </div>
+    <!-- Sidebar with Buttons for Chart Types -->
+    <div class="sidemenu"><br><br><br><br><br><br><br><br><br>
+     <h3>Phishing URL Detection - Graphical Analysis...</h3><br>
+        <a href="{% url 'charts' 'pie' %}">PIE CHART</a>
+        <a href="{% url 'charts' 'line' %}">LINE CHART</a>
+        <a href="{% url 'charts' 'spline' %}">SPLINE CHART</a>
+    </div>
+
+    <!-- Chart Display in Card -->
+    <div id="chartContainer" class="graph">
+        <!-- CanvasJS chart will be rendered here -->
+    </div>
+
+    <!-- CanvasJS Script -->
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+
+{% endblock %}

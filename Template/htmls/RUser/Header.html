@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Remote User</title>
+
+    <!-- Font for body and title -->
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url("{% static 'bg2.jpg' %}");
+            background-size: cover;
+            font-family: 'Open Sans', sans-serif;
+            color: #f0f0f0; /* Light text for readability */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff; /* White for high contrast */
+            font-family: 'Lora', serif;
+            font-size: 2.5em;
+            font-weight: 600; /* Bold title */
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Navigation Bar Styling */
+        .topnav {
+            display: flex;
+            justify-content: right;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        /* Navigation Cards (looking like buttons) */
+        .topnav .card {
+            padding: 12px 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Light background with transparency */
+            color: #2c3e50; /* Dark text for contrast */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            border-radius: 8px;
+            margin: 0 10px;
+            cursor: pointer;
+            width: auto; /* Adjust width to fit text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Navigation Links (inside cards) */
+        .topnav .card a {
+            color: #2c3e50; /* Dark text inside the card */
+            text-align: center;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            display: block;
+            width: 100%; /* Make the link take up the full width of the card */
+        }
+
+        /* Hover effects for navigation cards */
+        .topnav .card:hover {
+            background-color: #ecf0f1; /* Light grayish background on hover */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly deeper shadow on hover */
+            transform: translateY(-3px); /* Slight lift effect */
+        }
+
+        .topnav .card a:hover {
+            color: #2980b9; /* Change text color on hover to match blue */
+        }
+
+        /* Content Cards */
+        .card {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85); /* Slightly transparent white background */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Card Hover Effect */
+        .card:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+            transform: translateY(-4px); /* Lift effect on hover */
+        }
+
+        /* Title Styling for Content Section */
+        .style1 {
+            color: #f5efef;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1 class="style1">Phishing URL Detection: A Real Case Scenario Through Login URLs</h1>
+
+    <!-- Navigation Bar -->
+    <div class="topnav">
+        <div class="card">
+            <a href="{% url 'Predict_URL_Type' %}">PREDICT URL TYPE</a>
+        </div>
+        <div class="card">
+            <a href="{% url 'ViewYourProfile' %}">VIEW YOUR PROFILE</a>
+        </div>
+        <div class="card">
+            <a href="{% url 'login' %}">LOGOUT</a>
+        </div>
+    </div>
+
+    <!-- Main Content Area with Cards -->
+    <div class="mainholder">
+        <div class="card">
+            {% block userblock %}
+            {% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

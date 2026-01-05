@@ -1,0 +1,187 @@
+
+{% extends 'RUser/Header.html' %}
+{% block userblock %}
+
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Righteous&family=Fredoka+One&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f4f4f9;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container-fluid {
+        padding: 10px 10px;
+    }
+
+    /* Card Styling for Form */
+    .card {
+        background-color: rgba(255, 255, 255, 0.9); /* Slight transparency for a clean look */
+        padding: 30px;
+        box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+        border-radius: 25px;
+        max-width: 800px; /* Increased width */
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Align form content at the top */
+        height: auto; /* Allow the height to adjust according to content */
+    }
+
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;  /* Center form elements */
+    }
+
+    h1, h2, h3, p {
+        font-family: 'Fredoka One', cursive;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .text-uppercase {
+        font-family: 'Righteous', cursive;
+        font-size: 24px;
+        text-align: center;
+        color: #FF6347;
+        margin-bottom: 10px;
+    }
+
+    /* Styling for form elements */
+    .form-group {
+        margin-bottom: 10px;
+        width: 90%;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 25px;
+        border: 2px solid #ddd;
+        font-size: 16px;
+    }
+
+    .form-control:focus {
+        border-color:rgba(255, 99, 71, 0.5);
+        box-shadow: 0 0 5px rgba(255, 99, 71, 0.5);
+    }
+
+    /* Submit Button */
+    .btn-submit {
+        background-color: #FF6347;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        width: 100%;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        background-color: #e55c3e;
+        transform: scale(1.05); /* Slight grow effect */
+    }
+
+    /* Prediction Table Styling (No Card) */
+    .prediction-table {
+        margin-top: 30px;
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff; /* Keeps table background white */
+        border-radius: 8px;
+        box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    }
+
+    .prediction-table td {
+        padding: 15px;
+        border: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .prediction-header {
+        background-color: #FF6347;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 8px 8px 0 0; /* Rounded top corners */
+    }
+
+    .prediction-result {
+        font-size: 24px;
+        font-family: 'Fredoka One', cursive;
+        color: #2E8B57; /* Green color for the result to signify success */
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+        .container-fluid {
+            padding: 30px;
+        }
+
+        .card {
+            padding: 20px;
+            max-width: 100%;
+        }
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="card">
+
+            <div class="form-container">
+                <!-- Prediction Form -->
+                <form role="form" method="POST">
+                    {% csrf_token %}
+                    <fieldset>
+                        <p class="text-uppercase">PREDICTION OF URL TYPE</p>
+                        <hr>
+
+                        <div class="form-group">
+                            <label for="url_name" style="font-size: 18px; color: #FF6347;">Enter URL Name Here</label>
+                            <textarea id="url_name" name="url_name" class="form-control" rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <input name="submit" type="submit" class="btn-submit" value="Predict">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Prediction Result without Card Background -->
+        <div class="prediction-result-container">
+            <form role="form" method="POST">
+                {% csrf_token %}
+                <fieldset>
+                    <hr>
+
+                    <table class="prediction-table">
+                        <tr>
+                            <td class="prediction-header" colspan="2">
+                                PREDICTED URL TYPE:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="prediction-result">
+                                {{ objs }}
+                            </td>
+                        </tr>
+                    </table>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+{% endblock %}

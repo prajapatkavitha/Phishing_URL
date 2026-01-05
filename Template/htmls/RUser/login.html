@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Righteous&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="icon" href="images/icon.png" type="image/x-icon" />
+
+    <style>
+        body {
+            background: url("{% static 'bg1.jpg' %}");
+            background-size: cover;
+            color: white;
+            font-family: 'Righteous', cursive;
+            margin: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container-fluid {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 50px;
+            width: 100%;
+        }
+
+        .left-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 30px;
+        }
+
+        .right-section {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            padding-left: 30px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.85); /* Transparent white */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            max-width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
+        }
+
+        .card:hover {
+            transform: translateY(-10px); /* Card elevation effect on hover */
+            box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.2); /* Deeper shadow on hover */
+        }
+
+        .card input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+        .card input:focus {
+            border-color: #00aaff; /* Blue border on focus */
+            outline: none;
+        }
+
+        .card button {
+            width: 100%;
+            padding: 10px;
+			
+            background-color: #00aaff; /* Light blue border for hr */
+            ; /* Professional light blue */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .card button:hover {
+            background-color: #000033; /* Darker blue on hover */
+            transform: scale(1.05); /* Slight grow effect */
+        }
+
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            font-size: 50px; /* Large size to keep title in one line */
+            color: #ffffff; /* White for title */
+            text-transform: uppercase; /* Optional: Make title uppercase */
+            letter-spacing: 2px; /* Slight letter spacing for better readability */
+            line-height: 1.2;
+            margin-bottom: 10px; /* Adds space between title and subtitle */
+            white-space: nowrap; /* Prevent wrapping */
+            overflow: hidden; /* Prevents overflowing if text exceeds */
+            text-overflow: ellipsis; /* Adds ellipsis if text exceeds */
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 30px; /* Large size for subtitle */
+            color: rgb(194, 252, 2); /* Warm yellow-orange for the subtitle */
+            font-weight: 600; /* Bold for a more professional look */
+            letter-spacing: 1px;
+            line-height: 1.4;
+            margin-top: 0;
+            white-space: nowrap; /* Prevent the subtitle from wrapping */
+        }
+
+        .style4 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ff00ff; /* Professional purple color */
+        }
+
+        .style5 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00aaff; /* Blue for the login heading */
+        }
+
+        .subtext {
+            color: #dfe6e9; /* Light gray for subtext */
+            font-size: 16px;
+            font-weight: normal;
+            margin-top: 10px;
+        }
+
+        .button-container button {
+            margin-bottom: 15px; /* Adds a gap between buttons */
+        }
+
+        .text-center a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main Content Area -->
+    <div class="container-fluid">
+        <!--Left Section for Title and Subtitle -->
+        <div class="left-section">
+            <h1>Phishing URL Detection</h1>
+            <h2>A Real Case Scenario Through Login URLs</h2>
+            <p class="subtext">
+               With phishing attacks on the rise, detecting malicious URLs during login attempts is crucial to safeguarding user data.  
+                This system leverages machine learning to assess the legitimacy of URLs in real time.
+            </p>
+        </div>
+
+        <!-- Right Section for the Login Card -->
+        <div class="right-section">
+            <div class="card">
+                <h3 class="style5 text-center">Login Using Your Account:</h3>
+
+                <form method="POST" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="username" placeholder="Enter User Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" name="password" placeholder="Enter Password" required>
+                    </div>
+
+                    <div>
+                        <button type="submit" name="submit1">Login</button>
+                    </div>
+
+                    <p class="style5 text-center">OR</p>
+
+                    <div class="text-center button-container">
+                        <button class="btn btn-lg">
+                            <a href="{% url 'serviceproviderlogin' %}">SERVICE PROVIDER</a>
+                        </button>
+                        <button class="btn btn-lg">
+                            <a href="{% url 'Register1' %}">REGISTER</a>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

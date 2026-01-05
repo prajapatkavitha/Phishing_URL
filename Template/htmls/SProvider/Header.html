@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Provider</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* General Body Styling */
+        body {
+            background: url("{% static 'bg1.jpg' %}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #FFFFFF;
+            height: 100vh;
+            overflow: auto;  /* Allow content to scroll */
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards; /* Fade-in effect for body */
+        }
+
+        /* Fade-in effect for body */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Title Styling */
+        h1 {
+            color: white;
+            text-align: center;
+            font-size: 36px;
+            font-weight: 1000;
+            margin-top: 5px; /* Adjusted to give space from the top */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-top: 50px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            position: fixed; /* Keep title at the top */
+            top: 0;
+            width: 100%; /* Make sure title spans full width */
+            padding: 20px 0;
+            z-index: 10; /* Ensure title stays on top of other content */
+            transition: all 0.3s ease; /* Smooth transition for title */
+        }
+
+        /* Top Navigation Bar */
+        .topnav {
+            background-color: transparent; /* Invisible background */
+            position: fixed; /* Fix navbar at the top */
+            padding: 10px 0;
+            text-align: left;
+            width: 100%;
+            top: 80px; /* Position navbar just below the title */
+            z-index: 9; /* Navbar should stay just below title */
+            animation: slideDown 1s ease-out forwards; /* Smooth sliding effect for navbar */
+        }
+
+        /* Slide-down effect for navbar */
+        @keyframes slideDown {
+            from {
+                top: -60px;
+            }
+            to {
+                top: 80px;
+            }
+        }
+
+        /* Navbar Links Styled as Buttons */
+        .topnav a {
+            display: inline-block;
+            color: #ffffff;
+            background-color: #000033bb; /* Grey color for buttons */
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 30px;  /* Rounded corners for buttons */
+            margin: 8px;
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Initial shadow for buttons */
+        }
+
+        /* Hover effect for navbar links (buttons) */
+        .topnav a:hover {
+            background-color: #006bb3; /* Light blue on hover */
+            color: #f1f1f1;
+            transform: scale(1.05); /* Slight zoom effect */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.464); /* Stronger shadow on hover */
+        }
+
+        /* Active Link Style */
+        .topnav a.active {
+            background-color: #008CBA; /* Highlighted blue for active link */
+            color: white;
+        }
+
+        /* Main Content Holder */
+        .mainholder {
+            margin-top: 180px; /* Adjusted space for content below navbar and title */
+            padding: 20px;
+            text-align: center;
+            min-height: 80vh; /* Ensure content area takes up enough space */
+            animation: fadeInContent 1s ease-out forwards; /* Smooth fade-in for main content */
+        }
+
+        /* Fade-in effect for main content */
+        @keyframes fadeInContent {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Style for Error/Warning Messages */
+        .style1 {
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .topnav a {
+                padding: 10px 14px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<!-- Main Heading -->
+<h1 class="style1">Phishing URL Detection: A Real Case Scenario Through Login URLs</h1>
+
+<!-- Top Navigation Bar -->
+<div class="topnav">
+    <a href="{% url 'train_model' %}">Train & Test URL Data Sets</a>
+    <a href="{% url 'likeschart' 'bar' %}">View Accuracy in Bar Chart</a>
+    <a href="{% url 'charts1' 'line' %}">View Accuracy Results</a>
+    <a href="{% url 'View_Prediction_Of_URL_Type' %}">View Prediction of URL Type</a>
+    <a href="{% url 'View_URL_Type_Ratio' %}">View URL Type Ratio</a>
+    <a href="{% url 'charts' 'line' %}">View URL Type Ratio Results</a>
+    <a href="{% url 'login' %}">Logout</a>
+    <a href="{% url 'View_Remote_Users' %}">View All Remote Users</a>
+    <a href="{% url 'Download_Predicted_DataSets' %}">Download Predicted Data Sets</a>
+</div>
+
+<!-- Main Content Area -->
+<div class="mainholder">
+    {% block researchblock %}
+    <!-- Placeholder for dynamic content -->
+    {% endblock %}
+</div>
+
+</body>
+</html>

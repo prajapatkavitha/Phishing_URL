@@ -1,0 +1,218 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register Your Details</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster&family=Righteous&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <style>
+        body {
+            background: url("{% static 'bg22.avif' %}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        .container-fluid {
+            padding: 10px 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        #title {
+            font-family: 'Fredoka One', cursive;
+            color: #FF6347;
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .style1 {
+            color: #FF0000;
+            font-weight: bold;
+        }
+
+        .text-uppercase {
+            font-family: 'Righteous', cursive;
+            font-size: 22px;
+            color: #FF6347;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 1px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #FF6347;
+            box-shadow: 0 0 5px rgba(255, 99, 71, 0.5);
+        }
+
+        .btn-primary {
+            background-color: #FF6347;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #e55c3e;
+        }
+
+        .btn-lg {
+            font-size: 18px;
+        }
+
+        .status-message {
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .status-table {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .status-table td {
+            padding: 12px;
+            background-color: #FF6347;
+            color: white;
+            font-weight: bold;
+        }
+
+        .status-table td span {
+            color: #FFFF00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            #title {
+                font-size: 22px;
+            }
+
+            .btn-primary {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="container">
+            <h2 id="title">Phishing URL Detection<br>A Real Case Scenario Through Login URLs</h2>
+           
+            <hr>
+
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <form role="form" method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <img src="{% static 'Register.jpg' %}" alt="Register Image" class="img-fluid mb-4"><br>
+                            <span class="style1 text-center d-block mb-4">REGISTER YOUR DETAILS HERE !!!</span>
+
+                            <div class="form-group">
+                                <input type="text" name="username" id="username" placeholder="Enter User Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" name="email" id="email" placeholder="Enter Email Address" required>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea name="address" id="address" placeholder="Enter Address" required="required"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <select name="gender" required>
+                                    <option value="">---Select Gender---</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="number" name="phoneno" id="phoneno" placeholder="Enter Mobile Number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="country" id="country" placeholder="Enter Country" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="state" id="state" placeholder="Enter State" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="city" id="city" placeholder="Enter City" required>
+                            </div>
+
+                            <div class="form-group text-center">
+                                <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Register">
+                            </div>
+
+                        </fieldset>
+
+                        <div class="status-message">
+                            <button class="btn btn-lg"><a href="{% url 'login' %}" style="color: rgb(9, 235, 126)">User Login</a></button>
+                        </div>
+
+                        <!-- Registered Status Table -->
+                        <table class="status-table">
+                            <tr>
+                                <td>
+                                    <strong>Registered Status</strong>
+                                    <span>{{ object }}</span>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

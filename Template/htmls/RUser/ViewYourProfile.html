@@ -1,0 +1,122 @@
+{% extends 'RUser/Header.html' %}
+{% block userblock %}
+
+<link rel="icon" href="images/icon.png" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+
+<style>
+    body {
+        background-color: #f4f4f9; /* Light background color for the body */
+        font-family: 'Arial', sans-serif; /* A clean, readable font for the body */
+        color: #333; /* Default text color */
+        margin: 0;
+        padding: 0;
+		
+		
+    }
+
+    .container-fluid {
+        padding: 20px;
+        display: flex;
+        justify-content: flex-end; /* Align everything to the right */
+    }
+
+    .container {
+        background-color: #ffffff; /* White background for the container */
+        padding: 30px;
+        box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+        border-radius: 12px;
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .text-uppercase {
+        font-family: 'Righteous', cursive;
+        font-size: 24px;
+        color: #FF6347; /* Accent color */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .style1 {
+        color: #f5f0ef; /* Red color for highlighting */
+        font-weight: bold;
+    }
+
+    .form-group p {
+        font-size: 18px;
+        margin: 8px 0;
+        font-family: 'Fredoka One', cursive;
+    }
+
+    .form-group span {
+        font-weight: bold;
+        color: #333; /* Dark text for labels */
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container-fluid {
+            padding: 20px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- User Profile Form -->
+                    <form role="form" method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <p class="text-uppercase">YOUR PROFILE DETAILS</p>
+                            <hr>
+
+                            <div class="form-group">
+                                <p><span class="style1">USER NAME</span> = {{ object.username }}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <p><span class="style1">EMAIL</span> = {{ object.email }}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <p><span class="style1">ADDRESS</span> = {{ object.address }}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <p><span class="style1">GENDER</span> = {{ object.gender }}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <p><span class="style1">MOBILE NO</span> = {{ object.phoneno }}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <p><span class="style1">COUNTRY</span> = {{ object.country }}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <p><span class="style1">STATE</span> = {{ object.state }}</p>
+                            </div>
+
+                            <div class="form-group">
+                                <p><span class="style1">CITY</span> = {{ object.city }}</p>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
